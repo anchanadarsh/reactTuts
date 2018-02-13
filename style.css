@@ -1,0 +1,7 @@
+.comp{
+  padding: 5px;
+}
+
+.comp:nth-child(even){
+  background: #e6e6e6;
+}
