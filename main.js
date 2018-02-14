@@ -34,13 +34,21 @@ ReactDOM.render(
   ,document.getElementById("properties"));
 
 var Stickynotes = React.createClass({
+  getInitialState:function(){
+    return{editing:false};
+  },
   edit:function(){
-    alert("Edit");
+    this.setState({editing:true});
   },
   delete:function(){
-    alert("Delete");
+    console.log("Delete");
   },
-  render:function(){
+  save:function(){
+    var newCom = this.refs.newText.value;
+    alert("New Comment :" + newCom);
+    this.setState({editing:false});
+  },
+  renderNormal:function(){
     return(
       <div>
         <div className=""><h2>{this.props.children}</h2></div>
@@ -48,13 +56,30 @@ var Stickynotes = React.createClass({
         <button onClick={this.delete} className="btn m-xs btn-danger">Delete</button>
       </div>
     );
+  },
+  renderForm:function(){
+    return(
+      <div>
+        <div><textarea ref="newText" defaultValue={this.props.children}></textarea></div>
+        <button onClick={this.save} className="btn m-xs btn-success">Save</button>
+      </div>
+    );
+  },
+  render:function(){
+    if(this.state.editing){
+      return this.renderForm();
+    }else{
+      return this.renderNormal();
+    }
   }
 });
 
+var
+
 ReactDOM.render(
   <div>
-  <Stickynotes>sjvhjhsbcjhbc</Stickynotes>
-  <Stickynotes>cgcjc  cjhsjhc</Stickynotes>
-  <Stickynotes>hjgsj jhgs hgfs</Stickynotes>
+    <Stickynotes>sjvhjhsbcjhbc</Stickynotes>
+    <Stickynotes>cgcjc  cjhsjhc</Stickynotes>
+    <Stickynotes>hjgsj jhgs hgfs</Stickynotes>
   </div>
   ,document.getElementById("eventHandling"));
